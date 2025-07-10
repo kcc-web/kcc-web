@@ -9,16 +9,6 @@ import { Menu, X } from "lucide-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "KCC - 慶應珈琲倶楽部",
-  description: "コーヒーを通じて、出会いと表現を。KCC公式サイト",
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
-    apple: "/favicon.ico",
-  },
-};
-
 export default function RootLayout({ children }) {
   const [open, setOpen] = useState(false);
 
