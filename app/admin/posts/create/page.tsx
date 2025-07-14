@@ -7,7 +7,6 @@ import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
 import BackToAdmin from "@/components/admin/BackToAdmin";
 
-
 export default function CafePostCreatePage() {
   const supabase = createClient();
   const router = useRouter();
@@ -105,6 +104,7 @@ export default function CafePostCreatePage() {
 
   return (
     <div className="p-6 max-w-xl mx-auto">
+       <BackToAdmin />
       <h1 className="text-2xl font-bold mb-4">カフェレポート作成</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input

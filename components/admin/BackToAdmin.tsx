@@ -1,8 +1,12 @@
+// components/admin/BackToAdmin.tsx
+
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function BackToAdmin() {
+  console.log("✅ BackToAdmin コンポーネントが表示されました");
+
   return (
     <div className="mb-6">
       <Link href="/admin">
@@ -14,4 +18,5 @@ export default function BackToAdmin() {
     </div>
   );
 }
+
 

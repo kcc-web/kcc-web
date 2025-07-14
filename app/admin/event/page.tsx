@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
+import BackToAdmin from "@/components/admin/BackToAdmin"; // ✅ 追加！
 
 type Event = {
   id: string;
@@ -79,6 +80,8 @@ export default function AdminEventPage() {
 
   return (
     <div className="p-6 space-y-10">
+      <BackToAdmin /> {/* ✅ 管理ページへの戻るボタン */}
+
       {/* 作成 or 編集フォーム */}
       <div className="bg-gray-50 p-4 rounded">
         <h1 className="text-2xl font-bold mb-4">
@@ -162,5 +165,6 @@ export default function AdminEventPage() {
     </div>
   );
 }
+
 
 
