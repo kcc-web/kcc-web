@@ -5,6 +5,8 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
+import BackToAdmin from "@/components/admin/BackToAdmin";
+
 
 export default function CafePostCreatePage() {
   const supabase = createClient();

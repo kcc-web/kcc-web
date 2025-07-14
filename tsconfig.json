@@ -17,10 +17,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": ".",                             // ★ これを追加
-    "paths": {                                  // ★ これも追加
+
+    // ✅ 追加済み：絶対パスで "@/components" を使うため
+    "baseUrl": ".",
+    "paths": {
       "@/*": ["./*"]
     },
+
     "plugins": [
       {
         "name": "next"
@@ -38,4 +41,5 @@
     "node_modules"
   ]
 }
+
 
