@@ -30,15 +30,22 @@ export default function CafeListPage() {
 
   return (
     <div className="p-6">
-      <h1 className="text-2xl font-bold mb-4">カフェレポ一覧</h1>
-      <ul className="space-y-4">
+      <h1 className="text-2xl font-bold mb-6">カフェレポ一覧</h1>
+      <ul className="space-y-6">
         {cafes.map((cafe) => (
           <li key={cafe.id} className="border rounded p-4 shadow-sm">
-            <h2 className="text-xl font-semibold">{cafe.title}</h2>
-            <p className="text-gray-500 text-sm">{cafe.author}</p>
-            <p className="mt-2">{cafe.body}</p>
-            {cafe.tags && (
-              <div className="mt-2 text-sm text-blue-600">
+            <h2 className="text-xl font-semibold mb-1">{cafe.title}</h2>
+            <p className="text-sm text-gray-600 mb-2">{cafe.author}</p>
+            {cafe.photo_url && (
+              <img
+                src={cafe.photo_url}
+                alt="カフェ写真"
+                className="w-full max-w-md mb-3 rounded"
+              />
+            )}
+            <p className="mb-2">{cafe.body}</p>
+            {cafe.tags && cafe.tags.length > 0 && (
+              <div className="text-sm text-blue-600">
                 #{cafe.tags.join(' #')}
               </div>
             )}
@@ -48,4 +55,5 @@ export default function CafeListPage() {
     </div>
   );
 }
+
 
