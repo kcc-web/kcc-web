@@ -24,7 +24,7 @@ export default function EventsPage() {
         .order('date', { ascending: true });
 
       if (error) {
-        console.error('イベント取得失敗:', error);
+        console.error('イベント取得エラー:', error);
       } else {
         setEvents(data || []);
       }
@@ -44,12 +44,8 @@ export default function EventsPage() {
             <li key={ev.id} className="p-4 border rounded hover:shadow">
               <h3 className="text-xl font-semibold">{ev.title}</h3>
               <p className="text-gray-600">開催日：{ev.date}</p>
-              {ev.location && (
-                <p className="text-gray-500 text-sm">場所：{ev.location}</p>
-              )}
-              {ev.description && (
-                <p className="mt-1 text-sm">{ev.description}</p>
-              )}
+              {ev.location && <p className="text-gray-500 text-sm">場所：{ev.location}</p>}
+              {ev.description && <p className="mt-1 text-sm">{ev.description}</p>}
             </li>
           ))}
         </ul>
@@ -57,4 +53,5 @@ export default function EventsPage() {
     </div>
   );
 }
+
 
