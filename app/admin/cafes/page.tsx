@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
+import BackToAdmin from "@/components/admin/BackToAdmin"; // ✅ 追加
 
 type Cafe = {
   id: string;
@@ -30,7 +31,10 @@ export default function AdminCafeListPage() {
   });
 
   const fetchCafes = async () => {
-    const { data } = await supabase.from("cafes").select("*").order("created_at", { ascending: false });
+    const { data } = await supabase
+      .from("cafes")
+      .select("*")
+      .order("created_at", { ascending: false });
     if (data) setCafes(data);
   };
 
@@ -110,6 +114,8 @@ export default function AdminCafeListPage() {
 
   return (
     <div className="p-6">
+      <BackToAdmin /> {/* ✅ ここに追加 */}
+
       <h1 className="text-2xl font-bold mb-6">カフェレポート一覧（管理）</h1>
 
       {editTarget && (
@@ -148,5 +154,3 @@ export default function AdminCafeListPage() {
     </div>
   );
 }
-
-
