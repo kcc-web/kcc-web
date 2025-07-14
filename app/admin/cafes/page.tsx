@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/utils/supabase/client";
 
 type Cafe = {
-  id: number;
+  id: string;
   title: string;
   content: string;
   tags: string[];
@@ -102,7 +102,7 @@ export default function AdminCafeListPage() {
     setUploading(false);
   };
 
-  const handleDelete = async (id: number) => {
+  const handleDelete = async (id: string) => {
     if (!confirm("本当に削除しますか？")) return;
     const { error } = await supabase.from("cafes").delete().eq("id", id);
     if (!error) fetchCafes();
