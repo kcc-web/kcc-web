@@ -5,7 +5,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
-import heic2any from 'heic2any';
 
 export default function CafePostCreatePage() {
   const supabase = createClient();
@@ -30,6 +29,7 @@ export default function CafePostCreatePage() {
 
     if (file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic')) {
       try {
+        const heic2any = (await import('heic2any')).default;
         const convertedBlob = await heic2any({
           blob: file,
           toType: 'image/jpeg',
