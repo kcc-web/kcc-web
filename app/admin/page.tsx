@@ -1,3 +1,4 @@
+// ここが admin/page.tsx の一部（管理ダッシュボード用）
 "use client";
 
 import Link from "next/link";
@@ -7,22 +8,23 @@ const adminLinks = [
   {
     title: "イベント管理",
     href: "/admin/event",
-    icon: <Calendar className="w-6 h-6 text-blue-600" />, 
+    icon: <Calendar className="w-6 h-6 text-blue-600" />,
     description: "イベントの作成・編集・削除",
   },
   {
     title: "カフェレポ作成",
-    href: "/admin/posts/create",
-    icon: <PencilLine className="w-6 h-6 text-green-600" />, 
+    href: "/admin/posts/create", // ✅ 作成はOK
+    icon: <PencilLine className="w-6 h-6 text-green-600" />,
     description: "新しいカフェレポートを投稿",
   },
   {
     title: "カフェレポ一覧",
-    href: "/admin/posts/list",
-    icon: <FileText className="w-6 h-6 text-purple-600" />, 
+    href: "/admin/cafes", // ✅ ここが重要！ posts/list → cafes に変更！
+    icon: <FileText className="w-6 h-6 text-purple-600" />,
     description: "投稿済みのカフェレポートを管理",
   },
 ];
+
 
 export default function AdminDashboard() {
   return (
