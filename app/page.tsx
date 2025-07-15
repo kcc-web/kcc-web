@@ -1,36 +1,58 @@
-// app/page.js
+// app/page.tsx
 import Image from "next/image";
 
 export default function HomePage() {
   return (
-    <div className="space-y-12">
-      {/* ─── Hero セクション ─── */}
-      <section 
-      　className="
-      　　relative w-full rounded-2xl overflow-hidden shadow-lg 
-+         h-48 sm:h-64 md:h-80 lg:h-96
-+       "
-　　　　>
+    <div>
+      {/* Hero セクション */}
+      <section
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "300px",
+          borderRadius: "16px",
+          overflow: "hidden",
+          marginBottom: "2rem",
+        }}
+      >
         <Image
-          src="/images/keio-coffee-stand.png"  // public/images/keio-coffee-stand.png を指す
+          src="/images/keio-coffee-stand.png"
           alt="Keio Coffee Club"
-          fill                                // コンテナいっぱいに拡大
-          className="object-cover"
+          fill
+          style={{ objectFit: "cover" }}
           priority
         />
-        {/* キャッチコピーを重ねたい場合はコメントを外して調整 */}
-        <div className="absolute inset-0 bg-black/25 flex flex-col items-center justify-center p-4">
-+         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-2">
-+           ようこそ、慶應珈琲倶楽部へ
-+         </h1>
-+         <p className="text-sm sm:text-base md:text-lg text-white">
-+           コーヒーでつながる慶應コミュニティ
-+         </p>
-+       </div>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            color: "#fff",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            padding: "1rem",
+            textAlign: "center",
+          }}
+        >
+          <h1 style={{ fontSize: "2rem", fontWeight: "bold", marginBottom: "0.5rem" }}>
+            ようこそ、慶應珈琲倶楽部へ
+          </h1>
+          <p style={{ fontSize: "1rem" }}>コーヒーでつながる慶應コミュニティ</p>
+        </div>
       </section>
+
+      <p style={{ fontSize: "1.1rem" }}>
+        慶應珈琲倶楽部（KCC）は、コーヒー好きな学生が集まり、
+        学内外でイベントやカフェ体験を楽しむサークルです。
+      </p>
     </div>
   );
 }
+
+
+
 
 
 
