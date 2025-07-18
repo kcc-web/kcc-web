@@ -1,5 +1,3 @@
-// app/admin/posts/page.tsx
-
 'use client';
 
 import { useState } from 'react';
@@ -15,6 +13,7 @@ export default function CafePostCreatePage() {
   const [content, setContent] = useState('');
   const [tags, setTags] = useState('');
   const [author, setAuthor] = useState('');
+  const [mapUrl, setMapUrl] = useState(''); // ← 追加
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -87,6 +86,7 @@ export default function CafePostCreatePage() {
       tags: tagsArray,
       photo_url: photoUrl,
       author,
+      map_url: mapUrl, // ← 追加
       created_at: new Date().toISOString(),
     });
 
@@ -97,6 +97,7 @@ export default function CafePostCreatePage() {
     setContent('');
     setTags('');
     setAuthor('');
+    setMapUrl(''); // ← 追加
     setPhotoFile(null);
     setPreviewUrl(null);
     setUploading(false);
@@ -104,7 +105,7 @@ export default function CafePostCreatePage() {
 
   return (
     <div className="p-6 max-w-xl mx-auto">
-       <BackToAdmin />
+      <BackToAdmin />
       <h1 className="text-2xl font-bold mb-4">カフェレポート作成</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
@@ -136,6 +137,15 @@ export default function CafePostCreatePage() {
           required
         />
         <input
+          className="w-full border p-2"
+          placeholder="Googleマップの共有リンク（例：https://maps.app.goo.gl/...）"
+          value={mapUrl}
+          onChange={(e) => setMapUrl(e.target.value)}
+        />
+        <span className="text-xs text-gray-500">
+          Googleマップで「共有 → リンクをコピー」したURLを貼ってください
+        </span>
+        <input
           className="w-full"
           type="file"
           accept="image/*"
@@ -149,6 +159,7 @@ export default function CafePostCreatePage() {
     </div>
   );
 }
+
 
 
 

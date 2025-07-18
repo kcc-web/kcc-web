@@ -1,4 +1,4 @@
-// ここが admin/page.tsx の一部（管理ダッシュボード用）
+// app/admin/page.tsx
 "use client";
 
 import Link from "next/link";
@@ -8,47 +8,73 @@ const adminLinks = [
   {
     title: "イベント管理",
     href: "/admin/event",
-    icon: <Calendar className="w-6 h-6 text-blue-600" />,
+    icon: <Calendar size={32} color="#1e40af" />,
     description: "イベントの作成・編集・削除",
   },
   {
     title: "カフェレポ作成",
-    href: "/admin/posts/create", // ✅ 作成はOK
-    icon: <PencilLine className="w-6 h-6 text-green-600" />,
+    href: "/admin/posts/create",
+    icon: <PencilLine size={32} color="#16a34a" />,
     description: "新しいカフェレポートを投稿",
   },
   {
     title: "カフェレポ一覧",
-    href: "/admin/cafes", // ✅ ここが重要！ posts/list → cafes に変更！
-    icon: <FileText className="w-6 h-6 text-purple-600" />,
+    href: "/admin/cafes",
+    icon: <FileText size={32} color="#7c3aed" />,
     description: "投稿済みのカフェレポートを管理",
   },
 ];
 
-
 export default function AdminDashboard() {
   return (
-    <div className="p-8 min-h-screen bg-gray-50">
-      <h1 className="text-4xl font-bold mb-10 text-center text-gray-800">管理ダッシュボード</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <div style={{ padding: "2rem", background: "#f9f9f9", minHeight: "100vh" }}>
+      <h1 style={{ fontSize: "2rem", fontWeight: "bold", textAlign: "center", marginBottom: "2rem", color: "#333" }}>
+        管理ダッシュボード
+      </h1>
+
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
+          gap: "1.5rem",
+          maxWidth: "1000px",
+          margin: "0 auto",
+        }}
+      >
         {adminLinks.map((link) => (
           <Link
             key={link.href}
             href={link.href}
-            className="border rounded-2xl p-6 hover:shadow-2xl transition-all duration-200 bg-white hover:bg-gray-50 group"
+            style={{
+              border: "1px solid #ddd",
+              borderRadius: "12px",
+              padding: "1.2rem",
+              backgroundColor: "#fff",
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5rem",
+              boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+              transition: "all 0.2s ease-in-out",
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.boxShadow = "0 6px 14px rgba(0,0,0,0.1)";
+              e.currentTarget.style.backgroundColor = "#fefefe";
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.boxShadow = "0 2px 4px rgba(0,0,0,0.05)";
+              e.currentTarget.style.backgroundColor = "#fff";
+            }}
           >
-            <div className="flex items-center mb-3 space-x-3">
-              <div className="p-2 bg-gray-100 rounded-full group-hover:bg-gray-200">
-                {link.icon}
-              </div>
-              <h2 className="text-xl font-semibold text-gray-800 group-hover:text-blue-600">
-                {link.title}
-              </h2>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              {link.icon}
+              <h2 style={{ fontSize: "1.1rem", fontWeight: "bold", margin: 0 }}>{link.title}</h2>
             </div>
-            <p className="text-sm text-gray-600 group-hover:text-gray-800">{link.description}</p>
+            <p style={{ fontSize: "0.9rem", color: "#666", marginLeft: "2.3rem" }}>{link.description}</p>
           </Link>
         ))}
       </div>
     </div>
   );
 }
+
+
