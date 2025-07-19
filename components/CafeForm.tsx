@@ -40,12 +40,16 @@ export default function CafeForm() {
         .getPublicUrl(filePath);
       photoUrl = data.publicUrl;
     }
-
+ // カンマ区切りのタグを配列に変換
+    const tagsArray = tags
+      .split(",")
+      .map((tag) => tag.trim())
+      .filter((tag) => tag);
     // DBへの登録
     const { error } = await supabase.from("cafes").insert({
       title,
       content,
-      tags,
+      tags:tagsArray,
       photo_url: photoUrl,
       created_at: new Date().toISOString(),
       author: "admin", // 必要ならログインユーザーIDにする
