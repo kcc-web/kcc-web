@@ -26,7 +26,7 @@ export default function HomePage() {
           style={{
             position: "absolute",
             inset: 0,
-            backgroundColor: "rgba(0, 0, 0, 0.4)",
+            backgroundColor: "rgba(91, 57, 34, 0.5)",
             color: "#fff",
             display: "flex",
             flexDirection: "column",
@@ -43,7 +43,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <p style={{ fontSize: "1.1rem" }}>
+      <p style={{ fontSize: "1.1rem", color:"var(--brand-brown)" }}>
         慶應珈琲倶楽部（KCC）は、コーヒー好きな学生が集まり、
         学内外でイベントやカフェ体験を楽しむサークルです。
       </p>

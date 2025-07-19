@@ -19,8 +19,8 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body>
-        <header style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+       <header className="site-header">
+          <div className="container" style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
             <h1 style={{ fontSize: "1.5rem", fontWeight: "bold" }}>KCC</h1>
             <Image
               src="/images/keio-coffee-logo.png"
@@ -28,7 +28,7 @@ export default function RootLayout({
               width={32}
               height={32}
             />
-            <nav style={{ marginLeft: "auto", display: "flex", gap: "1rem" }}>
+            <nav>
               <Link href="/">Home</Link>
               <Link href="/about">About</Link>
               <Link href="/events">Events</Link>
@@ -39,18 +39,9 @@ export default function RootLayout({
           </div>
         </header>
 
-        <main style={{ padding: "2rem", maxWidth: "960px", margin: "0 auto" }}>
-          {children}
-        </main>
+        <main className="site-main container">{children}</main>
 
-        <footer
-          style={{
-            textAlign: "center",
-            padding: "1rem",
-            fontSize: "0.8rem",
-            color: "#888",
-          }}
-        >
+         <footer className="site-footer">
           © 2025 Keio Coffee Club. All rights reserved.
         </footer>
       </body>
