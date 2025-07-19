@@ -1,5 +1,4 @@
 // utils/uploadCafePhoto.ts
-import heic2any from 'heic2any';
 import { createClient } from '@/utils/supabase/client'; // ← 追加
 
 export const uploadCafePhoto = async (
@@ -18,6 +17,7 @@ export const uploadCafePhoto = async (
       file.name.toLowerCase().endsWith('.heif');
 
     if (isHEIC) {
+      const { default: heic2any } = await import ('heic2any');
       const convertedBlob = await heic2any({ blob: file, toType: 'image/jpeg' });
       if (convertedBlob instanceof Blob) {
         uploadFile = new File([convertedBlob], file.name.replace(/\.\w+$/, '.jpg'), {
