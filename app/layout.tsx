@@ -1,4 +1,3 @@
-// app/layout.tsx
 import "./globals.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,6 +14,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ja">
+      <head>
+        {/* ✅ これを追加 */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
       <body>
         <header style={{ padding: "1rem", borderBottom: "1px solid #ccc" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
@@ -40,13 +43,21 @@ export default function RootLayout({
           {children}
         </main>
 
-        <footer style={{ textAlign: "center", padding: "1rem", fontSize: "0.8rem", color: "#888" }}>
+        <footer
+          style={{
+            textAlign: "center",
+            padding: "1rem",
+            fontSize: "0.8rem",
+            color: "#888",
+          }}
+        >
           © 2025 Keio Coffee Club. All rights reserved.
         </footer>
       </body>
     </html>
   );
 }
+
 
 
 

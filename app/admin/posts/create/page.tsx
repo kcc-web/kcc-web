@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { createClient } from '@/utils/supabase/client';
+import { uploadCafePhoto } from '@/utils/supabase/uploadCafePhoto'; // ← 共通関数を使う
 import BackToAdmin from "@/components/admin/BackToAdmin";
 
 export default function CafePostCreatePage() {
@@ -13,7 +14,7 @@ export default function CafePostCreatePage() {
   const [content, setContent] = useState('');
   const [tags, setTags] = useState('');
   const [author, setAuthor] = useState('');
-  const [mapUrl, setMapUrl] = useState(''); // ← 追加
+  const [mapUrl, setMapUrl] = useState('');
   const [photoFile, setPhotoFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -24,55 +25,19 @@ export default function CafePostCreatePage() {
     setPreviewUrl(file ? URL.createObjectURL(file) : null);
   };
 
-  async function handleUploadImage(file: File): Promise<string | null> {
-    let uploadFile = file;
-
-    if (file.type === 'image/heic' || file.name.toLowerCase().endsWith('.heic')) {
-      try {
-        const heic2any = (await import('heic2any')).default;
-        const convertedBlob = await heic2any({
-          blob: file,
-          toType: 'image/jpeg',
-          quality: 0.9,
-        });
-        uploadFile = new File([convertedBlob as BlobPart], file.name.replace(/\.heic$/, '.jpg'), {
-          type: 'image/jpeg',
-        });
-      } catch (err) {
-        alert('HEIC画像の変換に失敗しました');
-        return null;
-      }
-    }
-
-    const ext = uploadFile.name.split('.').pop();
-    const fileName = `${Date.now()}.${ext}`;
-    const filePath = `admin/assets/${fileName}`;
-
-    const { error: uploadError } = await supabase.storage
-      .from('cafe-photos')
-      .upload(filePath, uploadFile);
-
-    if (uploadError) {
-      alert('❌ 画像アップロード失敗');
-      return null;
-    }
-
-    const { data } = supabase.storage.from('cafe-photos').getPublicUrl(filePath);
-    return data.publicUrl;
-  }
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setUploading(true);
 
     let photoUrl = '';
     if (photoFile) {
-      const url = await handleUploadImage(photoFile);
+      const url = await uploadCafePhoto(photoFile); // ← ここで変換＆アップロード
       if (!url) {
         setUploading(false);
         return;
       }
       photoUrl = url;
+      console.log("✅ 投稿に使う画像URL:", photoUrl);
     }
 
     const tagsArray = tags
@@ -86,7 +51,7 @@ export default function CafePostCreatePage() {
       tags: tagsArray,
       photo_url: photoUrl,
       author,
-      map_url: mapUrl, // ← 追加
+      map_url: mapUrl,
       created_at: new Date().toISOString(),
     });
 
@@ -97,7 +62,7 @@ export default function CafePostCreatePage() {
     setContent('');
     setTags('');
     setAuthor('');
-    setMapUrl(''); // ← 追加
+    setMapUrl('');
     setPhotoFile(null);
     setPreviewUrl(null);
     setUploading(false);
@@ -159,6 +124,7 @@ export default function CafePostCreatePage() {
     </div>
   );
 }
+
 
 
 

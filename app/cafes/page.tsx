@@ -19,61 +19,65 @@ export default function CafeListPage() {
   const [cafes, setCafes] = useState<Cafe[]>([]);
   const [openId, setOpenId] = useState<string | null>(null);
 
+  const fetchCafes = async () => {
+    const { data, error } = await supabase
+      .from('cafes')
+      .select('*')
+      .order('created_at', { ascending: false });
+
+    if (error) console.error('❌ エラー:', error.message);
+    else setCafes(data || []);
+  };
+
+  useEffect(() => {
+    fetchCafes();
+  }, []);
+
   const toggleOpen = (id: string) => {
     setOpenId(openId === id ? null : id);
   };
 
-  useEffect(() => {
-    const fetchCafes = async () => {
-      const { data, error } = await supabase.from('cafes').select('*').order('created_at', { ascending: false });
-      if (data) setCafes(data);
-      if (error) console.error(error.message);
-    };
-
-    fetchCafes();
-  }, []);
-
   return (
-    <div className="p-6 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold mb-6 text-center">カフェレポート一覧</h1>
-      <div className="space-y-4">
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">KCC Cafe Reports</h1>
+      <p className="text-center text-sm text-gray-500 mb-8">#カフェ巡り の記録をお届けします</p>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6">
         {cafes.map((cafe) => (
-          <div key={cafe.id} className="border rounded-lg p-4 shadow hover:bg-gray-50 transition">
-            <button onClick={() => toggleOpen(cafe.id)} className="text-left w-full space-y-2">
-              <h2 className="text-xl font-semibold">{cafe.title}</h2>
-              <p className="text-sm text-gray-500">投稿者: {cafe.author}</p>
-              <div className="text-sm text-gray-700">
-                {Array.isArray(cafe.tags) &&
-                  cafe.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="inline-block bg-blue-100 text-blue-800 text-xs px-2 py-1 mr-1 rounded"
-                    >
-                      #{tag}
-                    </span>
-                  ))}
-              </div>
-              <p className="text-sm text-gray-600 mt-2 whitespace-pre-wrap">
-                {cafe.content.length > 80 ? `${cafe.content.slice(0, 80)}...` : cafe.content}
-              </p>
-            </button>
+          <div
+          key={cafe.id}
+          className="border rounded-2xl shadow bg-white p-4 hover:shadow-md transition cursor-pointer"
+          onClick={() => toggleOpen(cafe.id)}
+          >
+            <h2 className="text-xl font-semibold mb-1">{cafe.title}</h2>
+            <p className="text-sm text-gray-500 mb-1">投稿者: {cafe.author}</p>
+            <div className="text-sm text-gray-600 flex flex-wrap gap-1 mb-2">
+              {Array.isArray(cafe.tags) &&
+                cafe.tags.map((tag) => (
+                  <span
+                    key={tag}
+                    className="bg-yellow-100 text-yellow-800 text-xs px-2 py-0.5 rounded-full"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+            </div>
 
             {openId === cafe.id && (
-              <div className="mt-4 border-t pt-3 space-y-3 text-sm bg-gray-50 rounded-b-lg">
-                <p className="whitespace-pre-wrap">{cafe.content}</p>
+              <div className="mt-3 text-sm text-gray-700 whitespace-pre-wrap">
                 {cafe.photo_url && (
                   <img
                     src={cafe.photo_url}
                     alt="カフェ写真"
-                    className="w-full max-w-md rounded"
+                    className="w-full h-40 object-cover rounded mb-2"
                   />
                 )}
+                <p>{cafe.content}</p>
                 {cafe.map_url?.includes('/embed?pb=') ? (
                   <iframe
                     src={cafe.map_url}
                     width="100%"
                     height="300"
-                    className="rounded"
+                    className="rounded mt-4"
                     style={{ border: 0 }}
                     allowFullScreen
                     loading="lazy"
@@ -83,7 +87,7 @@ export default function CafeListPage() {
                     href={cafe.map_url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-blue-600 underline"
+                    className="text-blue-600 underline block mt-4"
                   >
                     Googleマップで開く
                   </a>
@@ -96,10 +100,6 @@ export default function CafeListPage() {
     </div>
   );
 }
-
-
-
-
 
 
 
