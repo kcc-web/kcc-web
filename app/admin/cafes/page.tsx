@@ -97,9 +97,9 @@ export default function AdminCafeListPage() {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto">
+    <div className="p-6 max-w-5xl mx-auto">
       <h1 className="text-2xl font-bold mb-6">投稿されたカフェ一覧</h1>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         {cafes.map((cafe) => (
           <div key={cafe.id} className="border rounded p-4 shadow space-y-2">
             {editId === cafe.id ? (

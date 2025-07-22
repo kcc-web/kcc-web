@@ -38,7 +38,7 @@ export default function CafeListPage() {
       <h1 className="text-3xl font-bold mb-6 text-center">KCC Cafe Reports</h1>
       <p className="text-center text-sm text-gray-500 mb-8">#カフェ巡り の記録をお届けします</p>
       {/* スマホでは1列、画面幅が広い場合は2列で表示 */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 px-6">
         {cafes.map((cafe) => (
           <div
           key={cafe.id}
