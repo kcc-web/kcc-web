@@ -34,6 +34,8 @@ img {
 /* 共通レイアウト */
 .container {
   max-width: 960px;
+  /* allow a wider layout so grid views can display multiple columns */
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 1rem;
 }

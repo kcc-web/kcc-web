@@ -7,7 +7,7 @@ export default function CafeLayout({ children }: { children: React.ReactNode }) 
         <h1 className="text-3xl font-bold text-[#4B3F35]">KCC Cafe Reports</h1>
         <p className="text-sm text-gray-500 mt-1">#カフェ巡り の記録をお届けします</p>
       </header>
-      <main className="max-w-5xl mx-auto">{children}</main>
+      <main className="max-w-6xl mx-auto">{children}</main>
     </div>
   );
 }
